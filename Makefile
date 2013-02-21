@@ -1,13 +1,28 @@
-EXEEXT=  test
-#	 exetest
+TARGET = test
+CC = gcc
+CFLAGS = -Wall -O0 -ansi -g
+PRE_BIN = /usr/bin
+srcdir = src/
+SOURCES = $(wildcard *.c)
+OBJS = $(patsubst %.c, %.o, $(SOURCES))
+INCLUDES =
+LIBS =
 
-test:
-	gcc -o test src/test.c
-#exetest:
-#	gcc -o exetest exetest.c
+#%.o : %.c
+#	$(CC) -c $(INCLUDES) $< -o $@
 
+all: $(OBJS)
+	$(CC) $(CFLAGS) -o $(TARGET) $^ $(LIBS)
 
-
-.PHONY : clean
 clean:
-	-rm $(EXEEXT) 
+	rm -f $(OBJS)
+	rm -f $(TARGET)
+
+install: $(TARGET)
+	cp $(TARGET) $(PRE_BIN)
+
+uninstall:
+	rm -f $(PRE_BIN)/$(TARGET)
+
+rebuild: clean all
+
