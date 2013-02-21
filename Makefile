@@ -2,7 +2,7 @@ EXEEXT=  test
 #	 exetest
 
 test:
-	gcc -o test test.c
+	gcc -o test src/test.c
 #exetest:
 #	gcc -o exetest exetest.c
 
